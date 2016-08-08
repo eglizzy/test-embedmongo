@@ -26,6 +26,9 @@ trait EmbeddedMongoDb {
     Option(mongodProps).foreach(_.mongodExe.stop())
   }
 
+  protected def mongoConnect(run:  => Unit) = withEmbedMongoFixture() { props => run }
+
+
   protected def withEmbedMongoFixture(port: Int = 12345,
                                       version: Version = Version.V3_2_1,
                                       runtimeConfig: IRuntimeConfig = runtimeConfig)
